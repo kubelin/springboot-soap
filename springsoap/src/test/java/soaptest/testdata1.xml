@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+    <smart-phone>
+        <model>iPhone</model>
+        <price>1000000</price>
+        <firmware>20.1</firmware>
+    </smart-phone>
+    <smart-phone>
+        <model>Galaxy</model>
+        <price>900000</price>
+        <firmware>30.0</firmware>
+    </smart-phone>
+    <smart-phone>
+        <model>ThinQ</model>
+        <price>900000</price>
+        <firmware>5.5.0</firmware>
+    </smart-phone>
+    <smart-phone>
+        <model>HTC</model>
+        <price>800000</price>
+        <firmware>3</firmware>
+    </smart-phone>
+</list>

@@ -1,0 +1,150 @@
+<wsdl:definitions xmlns:ns1="http://www.kobis.or.kr/kobisopenapi" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BoxOfficeAPIService" targetNamespace="http://www.kobis.or.kr/kobisopenapi">
+<wsdl:types>
+<xs:schema xmlns:tns="http://www.kobis.or.kr/kobisopenapi" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.kobis.or.kr/kobisopenapi">
+<xs:element name="boxOfficeResult" nillable="true" type="xs:anyType"/>
+<xs:element name="dailyBoxOffice" type="tns:dailyBoxOffice"/>
+<xs:element name="searchDailyBoxOfficeList" type="tns:searchDailyBoxOfficeList"/>
+<xs:element name="searchDailyBoxOfficeListResponse" type="tns:searchDailyBoxOfficeListResponse"/>
+<xs:element name="searchWeeklyBoxOfficeList" type="tns:searchWeeklyBoxOfficeList"/>
+<xs:element name="searchWeeklyBoxOfficeListResponse" type="tns:searchWeeklyBoxOfficeListResponse"/>
+<xs:element name="weeklyBoxOffice" type="tns:weeklyBoxOffice"/>
+<xs:complexType name="searchDailyBoxOfficeList">
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:string"/>
+<xs:element minOccurs="0" name="targetDt" type="xs:string"/>
+<xs:element minOccurs="0" name="itemPerPage" type="xs:string"/>
+<xs:element minOccurs="0" name="multiMovieYn" type="xs:string"/>
+<xs:element minOccurs="0" name="repNationCd" type="xs:string"/>
+<xs:element minOccurs="0" name="wideAreaCd" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchDailyBoxOfficeListResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:dailyBoxOfficeResult"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dailyBoxOfficeResult">
+<xs:sequence>
+<xs:element minOccurs="0" name="boxofficeType" type="xs:string"/>
+<xs:element minOccurs="0" name="showRange" type="xs:string"/>
+<xs:element minOccurs="0" name="dailyBoxOfficeList">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:dailyBoxOffice"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dailyBoxOffice">
+<xs:sequence>
+<xs:element minOccurs="0" name="rnum" type="xs:string"/>
+<xs:element minOccurs="0" name="rank" type="xs:string"/>
+<xs:element minOccurs="0" name="rankInten" type="xs:string"/>
+<xs:element minOccurs="0" name="rankOldAndNew" type="xs:string"/>
+<xs:element minOccurs="0" name="movieCd" type="xs:string"/>
+<xs:element minOccurs="0" name="movieNm" type="xs:string"/>
+<xs:element minOccurs="0" name="openDt" type="xs:string"/>
+<xs:element minOccurs="0" name="salesAmt" type="xs:string"/>
+<xs:element minOccurs="0" name="salesShare" type="xs:string"/>
+<xs:element minOccurs="0" name="salesInten" type="xs:string"/>
+<xs:element minOccurs="0" name="salesChange" type="xs:string"/>
+<xs:element minOccurs="0" name="salesAcc" type="xs:string"/>
+<xs:element minOccurs="0" name="audiCnt" type="xs:string"/>
+<xs:element minOccurs="0" name="audiInten" type="xs:string"/>
+<xs:element minOccurs="0" name="audiChange" type="xs:string"/>
+<xs:element minOccurs="0" name="audiAcc" type="xs:string"/>
+<xs:element minOccurs="0" name="scrnCnt" type="xs:string"/>
+<xs:element minOccurs="0" name="showCnt" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="openApiFaultBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+<xs:element name="jsonReponse" type="xs:boolean"/>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchWeeklyBoxOfficeList">
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:string"/>
+<xs:element minOccurs="0" name="targetDt" type="xs:string"/>
+<xs:element minOccurs="0" name="itemPerPage" type="xs:string"/>
+<xs:element minOccurs="0" name="weekGb" type="xs:string"/>
+<xs:element minOccurs="0" name="multiMovieYn" type="xs:string"/>
+<xs:element minOccurs="0" name="repNationCd" type="xs:string"/>
+<xs:element minOccurs="0" name="wideAreaCd" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchWeeklyBoxOfficeListResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:weeklyBoxOfficeResult"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="weeklyBoxOfficeResult">
+<xs:sequence>
+<xs:element minOccurs="0" name="boxofficeType" type="xs:string"/>
+<xs:element minOccurs="0" name="showRange" type="xs:string"/>
+<xs:element minOccurs="0" name="yearWeekTime" type="xs:string"/>
+<xs:element minOccurs="0" name="weeklyBoxOfficeList">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:weeklyBoxOffice"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="weeklyBoxOffice">
+<xs:sequence>
+<xs:element minOccurs="0" name="rnum" type="xs:string"/>
+<xs:element minOccurs="0" name="rank" type="xs:string"/>
+<xs:element minOccurs="0" name="rankInten" type="xs:string"/>
+<xs:element minOccurs="0" name="rankOldAndNew" type="xs:string"/>
+<xs:element minOccurs="0" name="movieCd" type="xs:string"/>
+<xs:element minOccurs="0" name="movieNm" type="xs:string"/>
+<xs:element minOccurs="0" name="openDt" type="xs:string"/>
+<xs:element minOccurs="0" name="salesAmt" type="xs:string"/>
+<xs:element minOccurs="0" name="salesShare" type="xs:string"/>
+<xs:element minOccurs="0" name="salesInten" type="xs:string"/>
+<xs:element minOccurs="0" name="salesChange" type="xs:string"/>
+<xs:element minOccurs="0" name="salesAcc" type="xs:string"/>
+<xs:element minOccurs="0" name="audiCnt" type="xs:string"/>
+<xs:element minOccurs="0" name="audiInten" type="xs:string"/>
+<xs:element minOccurs="0" name="audiChange" type="xs:string"/>
+<xs:element minOccurs="0" name="audiAcc" type="xs:string"/>
+<xs:element minOccurs="0" name="scrnCnt" type="xs:string"/>
+<xs:element minOccurs="0" name="showCnt" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="OpenAPIFault" nillable="true" type="tns:openApiFaultBean"/>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="searchWeeklyBoxOfficeListResponse">
+<wsdl:part element="ns1:searchWeeklyBoxOfficeListResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="searchWeeklyBoxOfficeList">
+<wsdl:part element="ns1:searchWeeklyBoxOfficeList" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="OpenAPIFault">
+<wsdl:part element="ns1:OpenAPIFault" name="OpenAPIFault"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="searchDailyBoxOfficeListResponse">
+<wsdl:part element="ns1:searchDailyBoxOfficeListResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="searchDailyBoxOfficeList">
+<wsdl:part element="ns1:searchDailyBoxOfficeList" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="BoxOfficeAPIService">
+<wsdl:operation name="searchDailyBoxOfficeList">
+<wsdl:input message="ns1:searchDailyBoxOfficeList" name="searchDailyBoxOfficeList"> </wsdl:input>
+<wsdl:output message="ns1:searchDailyBoxOfficeListResponse" name="searchDailyBoxOfficeListResponse"> </wsdl:output>
+<wsdl:fault message="ns1:OpenAPIFault" name="OpenAPIFault"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="searchWeeklyBoxOfficeList">
+<wsdl:input message="ns1:searchWeeklyBoxOfficeList" name="searchWeeklyBoxOfficeList"> </wsdl:input>
+<wsdl:output message="ns1:searchWeeklyBoxOfficeListResponse" name="searchWeeklyBoxOfficeListResponse"> </wsdl:output>
+<wsdl:fault message="ns1:OpenAPIFault" name="OpenAPIFault"> </wsdl:fault>
+</wsdl:operation>
+</wsdl:portType>
+</wsdl:definitions>

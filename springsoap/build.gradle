@@ -1,0 +1,132 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.5'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'com.yupzip.wsdl2java' version '3.0.0'
+}
+
+group = 'com.kubelin'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-web-services'	
+	implementation 'org.springframework.ws:spring-ws-support:4.0.0'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    //compileOnly 'org.projectlombok:lombok'	
+	//annotationProcessor 'org.projectlombok:lombok'
+	
+	implementation 'com.sun.xml.bind:jaxb-impl:4.0.1'
+    implementation 'com.sun.xml.messaging.saaj:saaj-impl:3.0.0'
+    implementation 'com.sun.xml.ws:jaxws-ri:4.0.0'
+    
+    implementation 'io.swagger.core.v3:swagger-jaxrs2-jakarta:2.2.7'
+    
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+    implementation 'jakarta.xml.soap:jakarta.xml.soap-api:3.0.0'
+    implementation 'jakarta.xml.ws:jakarta.xml.ws-api:4.0.0'
+    
+   implementation 'org.jvnet.jaxb2_commons:jaxb2-namespace-prefix:2.0'
+    implementation 'codes.rafael.jaxb2_commons:jaxb2-basics:3.0.0'
+    implementation 'codes.rafael.jaxb2_commons:jaxb2-basics-runtime:3.0.0'
+    
+    implementation 'org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:4.0.1'
+    
+    implementation "javax.xml.bind:jaxb-api:2.3.1"
+	implementation "javax.xml.ws:jaxws-api:2.3.1"
+	implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+	implementation "org.glassfish.main.javaee-api:javax.jws:3.1.2.2"
+	implementation "com.sun.xml.messaging.saaj:saaj-impl:1.5.1"
+
+	// testImplementation
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+// tag::configurations[]
+configurations {
+	//compileOnly {
+	//	extendsFrom annotationProcessor
+	//},
+	wsdl2java
+	
+}
+// end::configurations[]
+
+// tag::wsdl2java dependencies[]
+dependencies {
+        wsdl2java (
+        //'com.sun.xml.bind:jaxb-impl:4.0.1',
+        'org.apache.cxf.xjc-utils:cxf-xjc-runtime:4.0.0',
+        'jakarta.xml.ws:jakarta.xml.ws-api:4.0.0',
+        'com.sun.xml.ws:rt:4.0.0',
+        'org.jvnet.jaxb2_commons:jaxb2-namespace-prefix:2.0',
+        'codes.rafael.jaxb2_commons:jaxb2-basics-runtime:3.0.0',
+        'codes.rafael.jaxb2_commons:jaxb2-basics:3.0.0'
+    )
+}
+// end::wsdl2java dependencies[]
+
+wsdl2java {
+    // 확장 프로퍼티로 값을 설정
+    wsdlDir = file("$projectDir/src/main/resources/wsdl/")
+    stabilizeAndMergeObjectFactory = true
+    includeJava8XmlDependencies = false
+    cxfVersion = "4.0.0"
+    cxfPluginVersion = "4.0.0"
+    wsdlsToGenerate = [
+            ['-xjc',
+             '-xjc-Xnamespace-prefix',
+             //'-b',"$projectDir/src/main/resources/wsdl/test.xml",
+             //'-b',"$projectDir/src/main/resources/wsdl/wsdlTypeDefBindings.xjb",
+             //'-wsdlLocation', 'classPath:wsdl/test.wsdl',
+             '-wsdlLocation', '$projectDir/src/main/resources/wsdl/test.wsdl',
+             '-p', 'com.kubelin.springsoap.vo.calc',
+             '-autoNameResolution',
+             '-verbose',
+             "$projectDir/src/main/resources/wsdl/test.wsdl"
+            ],
+             ['-xjc',
+             '-xjc-Xnamespace-prefix',
+             //'-b',"$projectDir/src/main/resources/wsdl/test.xml",
+             //'-b',"$projectDir/src/main/resources/wsdl/wsdlTypeDefBindings.xjb",
+             //'-wsdlLocation', 'classPath:wsdl/test.wsdl',             
+             '-wsdlLocation', 'http://www.kobis.or.kr/kobisopenapi/webservice/soap/boxoffice?wsdl',
+             '-p', 'com.kubelin.springsoap.vo.boxoffice',
+             '-autoNameResolution',
+             '-verbose',
+             "http://www.kobis.or.kr/kobisopenapi/webservice/soap/boxoffice?wsdl"
+            ],
+            ['-xjc',
+             '-xjc-Xnamespace-prefix',
+             //'-b',"$projectDir/src/main/resources/wsdl/test.xml",
+             //'-b',"$projectDir/src/main/resources/wsdl/wsdlTypeDefBindings.xjb",
+             //'-wsdlLocation', 'classPath:wsdl/test.wsdl',
+             '-wsdlLocation', '$projectDir/src/main/resources/wsdl/test2.wsdl',
+             '-p', 'com.kubelin.springsoap.vo.boxoffice2',
+             '-autoNameResolution',
+             '-verbose',
+             "$projectDir/src/main/resources/wsdl/test2.wsdl"
+            ]
+            
+    ]
+    generatedWsdlDir = file("src/generated-sources/java")
+    
+}
+
+bootJar {
+	baseName = 'gs-consuming-web-service'
+	version =  '0.0.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

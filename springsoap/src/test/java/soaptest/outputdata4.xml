@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<list>
+    <smart-phone>
+        <model>SAMSUNG</model>
+        <price>123123</price>
+    </smart-phone>
+    <smart-phone>
+        <model>LG</model>
+        <price>9999999</price>
+    </smart-phone>
+    <smart-phone>
+        <model>SAMSUNG</model>
+        <price>123123</price>
+    </smart-phone>
+</list>
