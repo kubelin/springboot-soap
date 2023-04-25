@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:Add xmlns:ns2="http://tempuri.org/">
-    <ns2:intA>1</ns2:intA>
-    <ns2:intB>999</ns2:intB>
-    <operation>Add</operation>
-</ns2:Add>
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:Add xmlns:ns0="http://tempuri.org/">
+   <ns0:intA>1</ns0:intA>
+   <ns0:intB>999</ns0:intB>
+   <operation>Add</operation>
+</ns0:Add>

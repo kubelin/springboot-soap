@@ -61,4 +61,11 @@ public class SearchDailyBoxOfficeListResponse {
         this._return = value;
     }
 
+	@Override
+	public String toString() {
+		return "SearchDailyBoxOfficeListResponse [_return=" + _return + "]";
+	}
+    
+    
+
 }

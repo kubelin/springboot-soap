@@ -518,4 +518,14 @@ public class DailyBoxOffice {
         this.showCnt = value;
     }
 
+	@Override
+	public String toString() {
+		return "DailyBoxOffice [rnum=" + rnum + ", rank=" + rank + ", rankInten=" + rankInten + ", rankOldAndNew="
+				+ rankOldAndNew + ", movieCd=" + movieCd + ", movieNm=" + movieNm + ", openDt=" + openDt + ", salesAmt="
+				+ salesAmt + ", salesShare=" + salesShare + ", salesInten=" + salesInten + ", salesChange="
+				+ salesChange + ", salesAcc=" + salesAcc + ", audiCnt=" + audiCnt + ", audiInten=" + audiInten
+				+ ", audiChange=" + audiChange + ", audiAcc=" + audiAcc + ", scrnCnt=" + scrnCnt + ", showCnt="
+				+ showCnt + "]";
+	}
+    
 }

@@ -22,7 +22,7 @@ public class DailyBoxOfficeResult {
     protected String boxofficeType;
 	@XmlElement(name = "showRange" )
     protected String showRange;
-	//@XmlElement(name = "dailyBoxOfficeList")
+	@XmlElement(name = "dailyBoxOfficeList")
     protected DailyBoxOfficeResult.DailyBoxOfficeList dailyBoxOfficeList;
 
     /**
@@ -81,21 +81,21 @@ public class DailyBoxOfficeResult {
      *     {@link DailyBoxOfficeResult.DailyBoxOfficeList }
      *     
      */
-//    public DailyBoxOfficeResult.DailyBoxOfficeList getDailyBoxOfficeList() {
-//        return dailyBoxOfficeList;
-//    }
-//
-//    /**
-//     * dailyBoxOfficeList 속성의 값을 설정합니다.
-//     * 
-//     * @param value
-//     *     allowed object is
-//     *     {@link DailyBoxOfficeResult.DailyBoxOfficeList }
-//     *     
-//     */
-//    public void setDailyBoxOfficeList(DailyBoxOfficeResult.DailyBoxOfficeList value) {
-//        this.dailyBoxOfficeList = value;
-//    }
+    public DailyBoxOfficeResult.DailyBoxOfficeList getDailyBoxOfficeList() {
+        return dailyBoxOfficeList;
+    }
+
+    /**
+     * dailyBoxOfficeList 속성의 값을 설정합니다.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DailyBoxOfficeResult.DailyBoxOfficeList }
+     *     
+     */
+    public void setDailyBoxOfficeList(DailyBoxOfficeResult.DailyBoxOfficeList value) {
+        this.dailyBoxOfficeList = value;
+    }
 
 
     /**
@@ -157,6 +157,14 @@ public class DailyBoxOfficeResult {
             return this.dailyBoxOffice;
         }
 
+		@Override
+		public String toString() {
+			return "DailyBoxOfficeList [dailyBoxOffice=" + dailyBoxOffice + ", getDailyBoxOffice()="
+					+ getDailyBoxOffice() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+					+ ", toString()=" + super.toString() + "]";
+		}
+
+	
     }
 
 }

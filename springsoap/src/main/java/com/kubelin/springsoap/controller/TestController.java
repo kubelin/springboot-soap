@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.kubelin.springsoap.service.MySoapService;
 import com.kubelin.springsoap.vo.boxoffice.BoxOfficeAPIServiceImplService;
 import com.kubelin.springsoap.vo.boxoffice.DailyBoxOfficeResult;
+import com.kubelin.springsoap.vo.boxoffice.DailyBoxOfficeResult.DailyBoxOfficeList;
 import com.kubelin.springsoap.vo.boxoffice.SearchDailyBoxOfficeList;
 import com.kubelin.springsoap.vo.boxoffice.SearchDailyBoxOfficeListResponse;
 import com.kubelin.springsoap.vo.calc.AddRequest;
@@ -30,7 +31,7 @@ public class TestController {
 	MySoapService soapClient;
 
     /**
-     * 
+     * basic sample with soapAction
      * @return
      * createDate : 2023. 4. 24.
      */
@@ -47,13 +48,8 @@ public class TestController {
 	 		calReq.setOperation("Add");
 	 		
 	 		logger.info(calReq.toString());
-	 		
 	 		logger.info(soapClient.callWebService(calReq, "http://www.dneonline.com/calculator.asmx?wsdl", "http://tempuri.org/Add").toString());
-	 		
 	 		logger.info("=== end of testSoap ");
-	 		
-	 		
-	 		
 		    
 	    }catch(Exception e) {
 	    	e.printStackTrace();
@@ -63,7 +59,7 @@ public class TestController {
 	}
 	
 	/**
-	 * 
+	 * basic sample without soapAction
 	 * @return
 	 * createDate : 2023. 4. 24.
 	 */
@@ -80,15 +76,20 @@ public class TestController {
 		 		String soapEndPoint = "http://www.kobis.or.kr/kobisopenapi/webservice/soap/boxoffice?wsdl";
 		 		String soapAction = "";		 		
 		 		SearchDailyBoxOfficeListResponse rearchDailyResponse = new SearchDailyBoxOfficeListResponse();
-
-		 		System.out.println(soapClient.callWebService(searchDailyRequest, soapEndPoint, soapAction).toString());
-//		 		rearchDailyResponse = (SearchDailyBoxOfficeListResponse) soapClient.callWebService(searchDailyRequest, soapEndPoint, soapAction);
-		 		JAXBElement<?> response =  (JAXBElement<?>) soapClient.callWebService(searchDailyRequest, soapEndPoint, soapAction);
-		 		//rearchDailyResponse = unmarshaller.unmarshal(soapClient.callWebService(searchDailyRequest, soapEndPoint, soapAction));	
+		 		DailyBoxOfficeResult dailyBoxOffice = new DailyBoxOfficeResult();
+		 		DailyBoxOfficeList dbList = new DailyBoxOfficeList();
+		 		rearchDailyResponse.setReturn(dailyBoxOffice);
 		 		
-		 		System.out.println(jaxbElementToString(response));
 
-		 		//logger.info();
+		 		JAXBElement<?> response =  (JAXBElement<?>) soapClient.callWebService(searchDailyRequest, soapEndPoint, soapAction);
+		 		rearchDailyResponse = (SearchDailyBoxOfficeListResponse) response.getValue();
+		 		dailyBoxOffice = rearchDailyResponse.getReturn();
+		 		
+		 		
+		 		logger.info(dailyBoxOffice.getBoxofficeType());
+		 		logger.info(dailyBoxOffice.getShowRange());
+		 		logger.info(dailyBoxOffice.getDailyBoxOfficeList().toString());
+
 		 		logger.info("=== end of testSoap2 ");
 		 		
 			    
@@ -99,21 +100,6 @@ public class TestController {
 		  return "index";
 	}
 	
-	// JAXBElement 객체를 XML 문자열로 출력하는 메서드
-	public String jaxbElementToString(JAXBElement<?> jaxbElement) throws JAXBException {
-	    Object value = jaxbElement.getValue();
-
-	    JAXBContext jaxbContext = JAXBContext.newInstance(value.getClass());
-	    Marshaller marshaller = jaxbContext.createMarshaller();
-	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-	    StringWriter stringWriter = new StringWriter();
-	    marshaller.marshal(value, stringWriter);
-
-	    return stringWriter.toString();
-	}
-	
-
 	/**
 	 * 생성된 Service 활용
 	 * @return
@@ -132,7 +118,6 @@ public class TestController {
 		 										.searchDailyBoxOfficeList("f5eef3421c602c6cb7ea224104795888", "10", "", "", "", "");
 		 		
 		 		System.out.println(result);
-		 		//logger.info();
 		 		logger.info("=== end of testSoap3 ");
 		 		
 			    
@@ -141,6 +126,27 @@ public class TestController {
 		    }
 		  
 		  return "index";
+	}
+	
+
+	/**
+	 * JAXBElement 객체를 XML 문자열로 출력
+	 * @param jaxbElement
+	 * @return
+	 * @throws JAXBException
+	 * createDate : 2023. 4. 24.
+	 */
+	public String jaxbElementToString(JAXBElement<?> jaxbElement) throws JAXBException {
+	    Object value = jaxbElement.getValue();
+
+	    JAXBContext jaxbContext = JAXBContext.newInstance(value.getClass());
+	    Marshaller marshaller = jaxbContext.createMarshaller();
+	    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+	    StringWriter stringWriter = new StringWriter();
+	    marshaller.marshal(value, stringWriter);
+
+	    return stringWriter.toString();
 	}
 	
 	

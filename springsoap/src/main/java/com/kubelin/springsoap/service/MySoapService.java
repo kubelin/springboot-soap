@@ -7,7 +7,6 @@ import com.kubelin.springsoap.vo.calc.AddResponse;
 
 @Service
 public interface MySoapService {
-	// public AddResponse callWebService(AddRequest request) throws Exception;
 	public Object callWebService(Object request, String endpoint) throws Exception;
 
 	public Object callWebService(Object request, String endpoint, String soapAction) throws Exception;

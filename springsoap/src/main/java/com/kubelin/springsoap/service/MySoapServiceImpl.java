@@ -10,17 +10,15 @@ import org.springframework.ws.soap.SoapMessage;
 /**
  * [주요 기능]
  * - callWebService
- * -> 
- * - 코드에 대한 설명 제공
- * - 코드 유효성 검증
+ * -> webServiceTemplate로 soap통신을 호출
  * 
  * [사용 방법]
- * - 이 클래스를 상속하여 공통 코드를 정의합니다.
- * - 코드 값과 코드에 대한 설명을 설정합니다.
- * - 코드 유효성 검증을 필요한 경우 해당 메서드를 오버라이드하여 구현합니다.
+ * - MySoapService Class Autowired -> callWebService method 실행  
+ * - Soap1.1, 1.2에 따라 필요한 method 사용
+ * - 별도의 로직이 필요한 경우 해당 메서드를 오버라이드하여 구현합니다.
  *
  * [주의 사항]
- * - 코드 값과 코드 설명은 변경 가능한 변수로 설정되어 있어 필요에 따라 수정할 수 있습니다.
+ * - SoapActionCallback , WebServiceMessageCallback 은 동일기능을 수행합니다.
  * 
  * @created kubelin
  * @since 2023-04-23
