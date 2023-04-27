@@ -65,5 +65,14 @@ public class SearchDailyBoxOfficeList {
         this.targetDt = value;
     }
 
+	@Override
+	public String toString() {
+		return "SearchDailyBoxOfficeList [key=" + key + ", targetDt=" + targetDt + ", getKey()=" + getKey()
+				+ ", getTargetDt()=" + getTargetDt() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+    
+    
+
 
 }
