@@ -2,6 +2,7 @@ package com.kubelin.springsoap.controller;
 
 import java.io.StringWriter;
 
+import org.apache.el.util.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,14 +101,58 @@ public class TestController {
 		  return "index";
 	}
 	
+
 	/**
-	 * 생성된 Service 활용
+	 * basic sample without soapAction
 	 * @return
-	 * createDate : 2023. 4. 24.
+	 * createDate : 2023. 4. 26.
 	 */
 	@GetMapping("/testSoap3")
 	public String testSoap3() {
-		logger.info("======= Call testSoap3");
+		logger.info("======= Call testSoap2");
+		
+		  try {
+		    	// SOAP 웹 서비스 호출 from web wsdl
+		 		SearchDailyBoxOfficeList searchDailyRequest = new SearchDailyBoxOfficeList();
+		 		searchDailyRequest.setKey("f5eef3421c602c6cb7ea224104795888");
+		 		searchDailyRequest.setTargetDt("20120101");
+		 		
+		 		String soapEndPoint = "http://www.kobis.or.kr/kobisopenapi/webservice/soap/boxoffice?wsdl";
+		 		String soapAction = "";		 		
+		 		SearchDailyBoxOfficeListResponse rearchDailyResponse = new SearchDailyBoxOfficeListResponse();
+		 		DailyBoxOfficeResult dailyBoxOffice = new DailyBoxOfficeResult();
+		 		DailyBoxOfficeList dbList = new DailyBoxOfficeList();
+		 		rearchDailyResponse.setReturn(dailyBoxOffice);
+		 		
+
+		 		JAXBElement<?> response =  (JAXBElement<?>) soapClient.callWebService(searchDailyRequest, soapEndPoint, soapAction);
+		 		rearchDailyResponse = (SearchDailyBoxOfficeListResponse) response.getValue();
+		 		dailyBoxOffice = rearchDailyResponse.getReturn();
+
+				//final ReflectionUtil reflectionUtil = new ReflectionUtil();
+		 		
+		 		logger.info(dailyBoxOffice.getBoxofficeType());
+		 		logger.info(dailyBoxOffice.getShowRange());
+		 		logger.info(dailyBoxOffice.getDailyBoxOfficeList().toString());
+
+		 		logger.info("=== end of testSoap2 ");
+		 		
+			    
+		    }catch(Exception e) {
+		    	e.printStackTrace();
+		    }
+		  
+		  return "index";
+	}
+
+	/**
+	 * using created Service
+	 * @return
+	 * createDate : 2023. 4. 24.
+	 */
+	@GetMapping("/testSoap4")
+	public String testSoap4() {
+		logger.info("======= Call testSoap4");
 		
 		  try {
 		    	// SOAP 웹 서비스 호출 from web wsdl
